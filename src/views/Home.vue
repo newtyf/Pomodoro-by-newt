@@ -1,8 +1,11 @@
 <template>
   <div id="page">
+    <video autoplay muted loop id="myVideo">
+      <source src="../assets/home/videos/Pixel Art Rain Shader.mp4" type="video/mp4">
+    </video>
     <div id="home">
     <NavBaarVue />
-    <pomodoroCardVue />
+    <PomodoroCardVue />
   </div>
   </div>
 </template>
@@ -15,13 +18,25 @@ import PomodoroCardVue from '../components/PomodoroCard.vue';
 
 <style lang="scss" scoped>
 #page {
-  background-color: #f28482;
   height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  #myVideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: 1;
+  }
 }
   #home {
-    margin: 0 100px;
-      @media (max-width: 768px) {
-      margin: 0 10px;
+    position: relative;
+    z-index: 2;
+    width: 600px;
+      @media (max-width: 767px) {
+      width: 350px;
     }
   }
 </style>

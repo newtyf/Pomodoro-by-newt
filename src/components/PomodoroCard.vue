@@ -1,13 +1,13 @@
 <template>
     <div id="card">
       <div class="pomodoro types">
-        <p @click="typeTime('Pomodoro')" :class="{active: tag == 'Pomodoro'}">Pomodoro</p>
+        <p @click="typeTime(settingsUser.pomodoro.name, settingsUser.pomodoro.type)" :class="{active: tag == 'Pomodoro'}">Pomodoro</p>
       </div>
       <div class="shortBreak types">
-        <p @click="typeTime('Short break')" :class="{active: tag == 'Short break'}">Short break</p>
+        <p @click="typeTime(settingsUser.shortBreak.name, settingsUser.shortBreak.type)" :class="{active: tag == 'Short break'}">Short break</p>
       </div>
       <div class="longBreak types">
-        <p @click="typeTime('Long Break')" :class="{active: tag == 'Long Break'}">Long Break</p>
+        <p @click="typeTime(settingsUser.longBreak.name, settingsUser.longBreak.type)" :class="{active: tag == 'Long Break'}">Long Break</p>
       </div>
       <div class="time">
         <div class="time-currently">
@@ -30,17 +30,14 @@ import { ref } from "@vue/reactivity";
 import tictacSong from "../assets/PomodoroCard/sounds/reloj-tic-tac.mp3"
 import buttonSong from "../assets/PomodoroCard/sounds/button-sound.mp3"
 import alertFinish from "../assets/PomodoroCard/sounds/alerta-por-subnormal-graciosos-.mp3"
+import { UsesettingsUser } from '../store/settingsUser'
 
-const minutes = ref(0)
-const seconds = ref(3)
+const settingsUser = UsesettingsUser();
 
+const minutes = ref(settingsUser.pomodoro.minutes)
+const seconds = ref(0)
 const played = ref(false)
-
-const tag = ref("Pomodoro")
-
-const typeTime = (property) => {
-  tag.value = property
-}
+const tag = ref("pomodoro")
 
 //instanciando sonido boton
 const btnSong = new Audio(buttonSong)
@@ -48,9 +45,20 @@ const btnSong = new Audio(buttonSong)
 const tictac = new Audio(tictacSong)
 // instanciando alerta de fin
 const alertEnd = new Audio(alertFinish)
-
 // indentificador del intervalo
 let timer
+
+// metodos
+// seteamos el tipo de timer
+const typeTime = (name, type) => {
+  tag.value = name
+  minutes.value = settingsUser[type].minutes
+  tictac.currentTime = 0
+  tictac.pause()
+  seconds.value = 0
+  played.value = false
+  clearInterval(timer)
+}
 //iniciando contador
 const start = () => {
   played.value = true
@@ -63,17 +71,16 @@ const start = () => {
   timer = setInterval(() => {
     seconds.value--
     // resta minutos cada 60seg si los minutos no son 0
-    if (seconds.value === 0 && minutes.value != 0) {
+    if (seconds.value < 0 && minutes.value != 0) {
       minutes.value--
-      seconds.value = 60
+      seconds.value = 59
     }
     // termina el intervlo
-    if (minutes.value == 0 && seconds.value == 0) {
+    if (minutes.value <= 0 && seconds.value <= 0) {
       clearInterval(timer)
       played.value = false
       tictac.pause()
       alertEnd.play()
-      seconds.value = 3
       console.log("finalizo");
     }
   }, 1000)
@@ -94,11 +101,13 @@ const stop = () => {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 50px 1fr;
-  border-radius: 20px;
+  border-radius: 10px;
   margin: 15px;
+  @media (min-width: 768px) {
+    margin: 15px 50px;
+  }
   text-align: center;
   background-color: rgba($color: #FAF9F9, $alpha: 0.2);
-  border: 1px solid #FAF9F9;
   .time {
     grid-column-start: 1;
     grid-column-end: 4;
@@ -120,7 +129,7 @@ const stop = () => {
       font-weight: bold;
       width: 70%;
       margin-bottom: 20px;
-      color: #f28482;
+      color: rgb(90, 207, 184);
       cursor: pointer;
       margin-top: 10px;
       &.play {
@@ -139,6 +148,7 @@ const stop = () => {
   .types {
     display: flex;
     justify-content: center;
+    align-items: center;
     color: #FAF9F9;
     font-weight: bold;
     margin-top: 20px;
