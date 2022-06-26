@@ -37,7 +37,7 @@ const settingsUser = UsesettingsUser();
 const minutes = ref(settingsUser.pomodoro.minutes)
 const seconds = ref(0)
 const played = ref(false)
-const tag = ref("pomodoro")
+const tag = ref("Pomodoro")
 
 //instanciando sonido boton
 const btnSong = new Audio(buttonSong)
@@ -115,6 +115,7 @@ const stop = () => {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    margin-top: 5px;
     .time-currently {
       font-size: 110px;
       font-weight: bold;
@@ -143,6 +144,8 @@ const stop = () => {
       padding: 10px;
       border-radius: 10px;
       margin-bottom: 20px;
+      color: #BEE3DB;
+      font-weight: bold;
     }
   }
   .types {
@@ -159,7 +162,7 @@ const stop = () => {
       border-radius: 5px;
       &.active {
         transition: 0.2s ease-in-out;
-        background-color:rgba($color: #555B6E, $alpha: 0.3);
+        background-color:rgba($color: #555B6E, $alpha: 0.8);
       }
     }
   }

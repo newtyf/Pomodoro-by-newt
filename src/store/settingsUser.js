@@ -5,7 +5,7 @@ export const UsesettingsUser = defineStore('settings', {
   state: () => ({
     pomodoro: {
       type: 'pomodoro',
-      name: 'pomodoro',
+      name: 'Pomodoro',
       minutes: 25
     },
     shortBreak: {

@@ -1,7 +1,7 @@
 <template>
   <div id="page">
     <video autoplay muted loop id="myVideo">
-      <source src="../assets/home/videos/Pixel Art Rain Shader.mp4" type="video/mp4">
+      <source :src="videoBack" type="video/mp4">
     </video>
     <div id="home">
     <NavBaarVue />
@@ -13,6 +13,7 @@
 <script setup>
 import NavBaarVue from '../components/NavBaar.vue';
 import PomodoroCardVue from '../components/PomodoroCard.vue';
+import videoBack from '../assets/home/videos/Pixel Art Rain Shader.mp4'
 
 </script>
 
@@ -22,6 +23,7 @@ import PomodoroCardVue from '../components/PomodoroCard.vue';
   width: 100vw;
   display: flex;
   justify-content: center;
+  background-color: rgb(17, 184, 150);
   #myVideo {
     position: fixed;
     right: 0;
