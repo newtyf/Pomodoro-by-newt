@@ -14,8 +14,6 @@
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
-  }
-  body {
-    background-color: #FAF9F9;
+    //height: 100vh;
   }
 </style>
