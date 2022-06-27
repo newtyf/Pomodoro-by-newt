@@ -11,12 +11,12 @@ export const UsesettingsUser = defineStore('settings', {
     shortBreak: {
       type: 'shortBreak',
       name: 'Short break',
-      minutes: 10
+      minutes: 5
     },
     longBreak: {
       type: 'longBreak',
       name: 'Long Break',
-      minutes: 5
+      minutes: 15
     }
   }),
   // could also be defined as
