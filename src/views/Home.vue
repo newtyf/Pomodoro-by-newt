@@ -4,8 +4,9 @@
       <source :src="videoBack" type="video/mp4">
     </video>
     <div id="home">
-    <NavBaarVue />
-    <PomodoroCardVue />
+      <SettingsTimerVue />
+      <NavBaarVue />
+      <PomodoroCardVue />
   </div>
   </div>
 </template>
@@ -14,6 +15,7 @@
 import NavBaarVue from '../components/NavBaar.vue';
 import PomodoroCardVue from '../components/PomodoroCard.vue';
 import videoBack from '../assets/home/videos/Pixel Art Rain Shader.mp4'
+import SettingsTimerVue from '../components/SettingsTimer.vue';
 
 </script>
 

@@ -11,7 +11,7 @@
       </div>
       <div class="time">
         <div class="time-currently">
-          <span class="minutes">{{ minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }) }}</span>:<span
+          <span class="minutes">{{ settingsUser[type].minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }) }}</span>:<span
             class="seconds">{{ seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 }) }}</span>
         </div>
         <button v-show="!played" class="play btn" @click="start" tabindex="1">
@@ -20,6 +20,7 @@
         <button v-show="played" class="stop btn" @click="stop" tabindex="1">
           STOP
         </button>
+        <img class="restart" @click="restartTimer" src="../assets/PomodoroCard/imgs/resetart.svg" alt="">
         <p class="time-tag">{{ tag }}</p>
       </div>
     </div>
@@ -27,14 +28,15 @@
 
 <script setup>
 import { ref } from "@vue/reactivity";
-import tictacSong from "../assets/PomodoroCard/sounds/reloj-tic-tac.mp3"
+import tictacSong from "../assets/PomodoroCard/sounds/rain-6.mp3"
 import buttonSong from "../assets/PomodoroCard/sounds/button-sound.mp3"
 import alertFinish from "../assets/PomodoroCard/sounds/alerta-por-subnormal-graciosos-.mp3"
 import { UsesettingsUser } from '../store/settingsUser'
 
 const settingsUser = UsesettingsUser();
 
-const minutes = ref(settingsUser.pomodoro.minutes)
+const type = ref("pomodoro")
+let minutesBackup = settingsUser[type.value].back
 const seconds = ref(0)
 const played = ref(false)
 const tag = ref("Pomodoro")
@@ -48,11 +50,13 @@ const alertEnd = new Audio(alertFinish)
 // indentificador del intervalo
 let timer
 
-// metodos
+// metodos:
 // seteamos el tipo de timer
-const typeTime = (name, type) => {
+const typeTime = (name, typechan) => {
+  type.value = typechan
+  minutesBackup = settingsUser[type.value].back
+  settingsUser[type.value].minutes = minutesBackup
   tag.value = name
-  minutes.value = settingsUser[type].minutes
   tictac.currentTime = 0
   tictac.pause()
   seconds.value = 0
@@ -61,9 +65,12 @@ const typeTime = (name, type) => {
 }
 //iniciando contador
 const start = () => {
+  document.querySelector(".restart").classList.add("active")
   played.value = true
   tictac.loop = true
-  tictac.play()
+  setTimeout(() => {
+    tictac.play()
+  }, 500)
   btnSong.play()
   alertEnd.pause()
 
@@ -71,13 +78,14 @@ const start = () => {
   timer = setInterval(() => {
     seconds.value--
     // resta minutos cada 60seg si los minutos no son 0
-    if (seconds.value < 0 && minutes.value != 0) {
-      minutes.value--
+    if (seconds.value < 0 && settingsUser[type.value].minutes != 0) {
+      settingsUser[type.value].minutes--
       seconds.value = 59
     }
     // termina el intervlo
-    if (minutes.value <= 0 && seconds.value <= 0) {
+    if (settingsUser[type.value].minutes <= 0 && seconds.value <= 0) {
       clearInterval(timer)
+      settingsUser[type.value].minutes = minutesBackup
       played.value = false
       tictac.pause()
       alertEnd.play()
@@ -87,10 +95,20 @@ const start = () => {
 }
 //parar contador
 const stop = () => {
+  document.querySelector(".restart").classList.remove("active")
   played.value = false
 
   btnSong.play()
   tictac.pause()
+  clearInterval(timer)
+}
+
+const restartTimer = () => {
+  settingsUser[type.value].minutes = minutesBackup
+  tictac.currentTime = 0
+  tictac.pause()
+  played.value = false
+  seconds.value = 0
   clearInterval(timer)
 }
 
@@ -116,6 +134,7 @@ const stop = () => {
     flex-direction: column;
     justify-content: center;
     margin-top: 5px;
+    position: relative;
     .time-currently {
       font-size: 110px;
       font-weight: bold;
@@ -136,6 +155,25 @@ const stop = () => {
       &.play {
         transform: translateY(-5px);
         box-shadow: 0 5px #BEE3DB;
+      }
+    }
+    .restart {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      right: 30px;
+      bottom: 93px;
+      transition: all 0.5s ease;
+      transform: scale(0);
+      opacity: 0;
+      @media (max-width: 764px) {
+        width: 25px;
+        height: 25px;
+        right: 15px;
+      }
+      &.active {
+        transform: scale(1);
+        opacity: 1;
       }
     }
     .time-tag {

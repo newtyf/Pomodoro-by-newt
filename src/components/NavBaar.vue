@@ -9,7 +9,7 @@
       </div>
       <div class="options">
         <div class="config">
-          <img src="../assets/NavBar/imgs/sliders-solid.svg" alt="">
+          <img src="../assets/NavBar/imgs/sliders-solid.svg" @click="openModal" alt="">
         </div>
         <div class="profile">
           <img src="../assets/NavBar/imgs/user-solid.svg" alt="">
@@ -20,7 +20,10 @@
 </template>
 
 <script setup>
-
+const openModal = () => {
+  const modal = document.getElementById("modal")
+  modal.classList.add("active")
+}
 </script>
 
 <style lang="scss" scoped>
@@ -61,6 +64,10 @@
         border: 2px solid #FAF9F9;
         border-radius: 5px;
         padding: 5px;
+        cursor: pointer;
+        &:hover {
+          border-color: #BEE3DB;
+        }
         img {
           width: 100%;
           height: 100%;
@@ -71,6 +78,10 @@
         border: 2px solid #FAF9F9;
         border-radius: 5px;
         padding: 5px;
+        cursor: pointer;
+        &:hover {
+          border-color: #BEE3DB;
+        }
         img {
           width: 100%;
           height: 100%;
