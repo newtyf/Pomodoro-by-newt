@@ -9,6 +9,10 @@
       </div>
       <div class="options">
         <div class="config">
+          <img src="../assets/NavBar/imgs/minimize-solid.svg" v-show="full" @click="fullClose" />
+          <img src="../assets/NavBar/imgs/maximize-solid.svg" v-show="!full" @click="fullOpen" />
+        </div>
+        <div class="config">
           <img src="../assets/NavBar/imgs/sliders-solid.svg" @click="openModal" alt="">
         </div>
         <!-- <div class="profile">
@@ -20,10 +24,26 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
+
+const full = ref(false)
+
 const openModal = () => {
   const modal = document.getElementById("modal")
   modal.classList.add("active")
 }
+
+const fullOpen = () => {
+  document.getElementById('page').requestFullscreen()
+  full.value = true
+}
+
+const fullClose = () => {
+  document.exitFullscreen()
+  full.value = false
+}
+
 </script>
 
 <style lang="scss" scoped>
