@@ -53,6 +53,7 @@ let timer
 // metodos:
 // seteamos el tipo de timer
 const typeTime = (name, typechan) => {
+  document.querySelector(".restart").classList.remove("active")
   type.value = typechan
   minutesBackup = settingsUser[type.value].back
   settingsUser[type.value].minutes = minutesBackup
