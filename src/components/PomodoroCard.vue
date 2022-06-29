@@ -105,6 +105,7 @@ const stop = () => {
 }
 
 const restartTimer = () => {
+  minutesBackup = settingsUser[type.value].back
   settingsUser[type.value].minutes = minutesBackup
   tictac.currentTime = 0
   tictac.pause()
