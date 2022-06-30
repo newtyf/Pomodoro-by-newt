@@ -2,7 +2,7 @@
   <div>
     <nav id="nav">
       <div class="logo">
-        <img src="../assets/NavBar/imgs/logo.webp" width="55px" height="59px" alt="foto-anime">
+        <img src="../assets/NavBar/imgs/logo.webp" alt="foto-anime">
         <div class="titulo">
           <h2>POMODORO<span> by newt</span></h2>
         </div>
