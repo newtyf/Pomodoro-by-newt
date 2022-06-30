@@ -16,6 +16,14 @@ import NavBarVue from '../components/NavBar.vue';
 import PomodoroCardVue from '../components/PomodoroCard.vue';
 import videoBack from '../assets/home/videos/Pixel Art Rain Shader.mp4'
 import SettingsTimerVue from '../components/SettingsTimer.vue';
+import { UsesettingsUser } from '../store/settingsUser'
+
+const settingsUser = UsesettingsUser()
+
+if (localStorage.getItem('pomodoro')) {
+  settingsUser.GetOfLocalStorage()
+}
+
 
 </script>
 

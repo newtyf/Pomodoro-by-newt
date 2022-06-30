@@ -43,16 +43,19 @@ const longBreakMinutes = ref(settingsUser.longBreak.minutes)
 watch(pomodoroMinutes, () => {
   settingsUser.pomodoro.minutes = pomodoroMinutes.value
   settingsUser.pomodoro.back = pomodoroMinutes.value
+  settingsUser.SaveInLocalStorage(pomodoroMinutes.value, shortBreakMinutes.value, longBreakMinutes.value)
 })
 
 watch(shortBreakMinutes, () => {
   settingsUser.shortBreak.minutes = shortBreakMinutes.value
   settingsUser.shortBreak.back = shortBreakMinutes.value
+  settingsUser.SaveInLocalStorage(pomodoroMinutes.value, shortBreakMinutes.value, longBreakMinutes.value)
 })
 
 watch(longBreakMinutes, () => {
   settingsUser.longBreak.minutes = longBreakMinutes.value
   settingsUser.longBreak.back = longBreakMinutes.value
+  settingsUser.SaveInLocalStorage(pomodoroMinutes.value, shortBreakMinutes.value, longBreakMinutes.value)
 })
 
 const cerrarModal = () => {

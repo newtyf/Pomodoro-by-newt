@@ -41,9 +41,11 @@ const seconds = ref(0)
 const played = ref(false)
 const tag = ref("Pomodoro")
 
+console.log(settingsUser['longBreak'].minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }));
+
 //instanciando sonido boton
 const btnSong = new Audio(buttonSong)
-// instanciando el audio de tic-tac
+// instanciando el audio de fondo al iniciar el timer
 const tictac = new Audio(tictacSong)
 // instanciando alerta de fin
 const alertEnd = new Audio(alertFinish)

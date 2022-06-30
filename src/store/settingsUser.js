@@ -22,14 +22,23 @@ export const UsesettingsUser = defineStore('settings', {
       back: 15
     }
   }),
-  getters: {
-    timeeee: (state) => state.pomodoro.minutes,
-  },
   // could also be defined as
   // state: () => ({ count: 0 })
   actions: {
-    increment() {
-      this.count++
+    SaveInLocalStorage(minutesPomodoro, minutesShort, minutesLong) {
+      localStorage.setItem('pomodoro', minutesPomodoro.toLocaleString(undefined, { minimumIntegerDigits: 2 }))
+      localStorage.setItem('short', minutesShort.toLocaleString(undefined, { minimumIntegerDigits: 2 }))
+      localStorage.setItem('long', minutesLong.toLocaleString(undefined, { minimumIntegerDigits: 2 }))
     },
+    GetOfLocalStorage() {
+      this.pomodoro.minutes = localStorage.getItem('pomodoro')
+      this.pomodoro.back = localStorage.getItem('pomodoro')
+
+      this.shortBreak.minutes = localStorage.getItem('short')
+      this.shortBreak.back = localStorage.getItem('short')
+
+      this.longBreak.minutes = localStorage.getItem('long')
+      this.longBreak.back =localStorage.getItem('long')
+    }
   },
 })
