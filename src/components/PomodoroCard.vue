@@ -14,13 +14,13 @@
           <span class="minutes">{{ settingsUser[type].minutes.toLocaleString(undefined, { minimumIntegerDigits: 2 }) }}</span>:<span
             class="seconds">{{ seconds.toLocaleString(undefined, { minimumIntegerDigits: 2 }) }}</span>
         </div>
-        <button v-show="!played" class="play btn" @click="start" tabindex="1">
+        <button v-show="!played" class="play btn" @click="start">
           START
         </button>
-        <button v-show="played" class="stop btn" @click="stop" tabindex="1">
+        <button v-show="played" class="stop btn" @click="stop">
           STOP
         </button>
-        <img class="restart" @click="restartTimer" src="../assets/PomodoroCard/imgs/resetart.svg" alt="">
+        <img class="restart" @click="restartTimer" src="../assets/PomodoroCard/imgs/resetart.svg" alt="logo-restart">
         <p class="time-tag">{{ tag }}</p>
       </div>
     </div>

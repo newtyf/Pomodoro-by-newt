@@ -2,18 +2,18 @@
   <div>
     <nav id="nav">
       <div class="logo">
-        <img src="../assets/NavBar/imgs/logo.png" alt="foto-anime">
+        <img src="../assets/NavBar/imgs/logo.webp" width="55px" height="59px" alt="foto-anime">
         <div class="titulo">
           <h2>POMODORO<span> by newt</span></h2>
         </div>
       </div>
       <div class="options">
         <div class="config">
-          <img src="../assets/NavBar/imgs/minimize-solid.svg" v-show="full" @click="fullClose" />
-          <img src="../assets/NavBar/imgs/maximize-solid.svg" v-show="!full" @click="fullOpen" />
+          <img src="../assets/NavBar/imgs/minimize-solid.svg" v-show="full" @click="fullClose" alt="minimizise"/>
+          <img src="../assets/NavBar/imgs/maximize-solid.svg" v-show="!full" @click="fullOpen" alt="maximizise"/>
         </div>
         <div class="config">
-          <img src="../assets/NavBar/imgs/sliders-solid.svg" @click="openModal" alt="">
+          <img src="../assets/NavBar/imgs/sliders-solid.svg" @click="openModal" alt="options">
         </div>
         <!-- <div class="profile">
           <img src="../assets/NavBar/imgs/user-solid.svg" alt="">
