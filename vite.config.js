@@ -1,6 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { VitePWA } from 'vite-plugin-pwa'
+//import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -8,7 +8,8 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [vue(), ],
     server: {
-      host: env.VITE_HOST
+      // if you want to enable the host for network, you should create a ".env.local" file and the copy all of ".env.exmaple" into the file.
+      host: env.VITE_HOST || false
     }
   }
 })
