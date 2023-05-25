@@ -1,30 +1,28 @@
 <template>
   <div id="page">
     <video autoplay muted loop id="myVideo">
-      <source :src="videoBack" type="video/mp4">
+      <source src="/Pixel Art Rain Shader.mp4" type="video/mp4" />
     </video>
     <div id="home">
       <SettingsTimerVue />
       <NavBarVue />
       <PomodoroCardVue />
-  </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import NavBarVue from '../components/NavBar.vue';
-import PomodoroCardVue from '../components/PomodoroCard.vue';
-import videoBack from '../assets/home/videos/Pixel Art Rain Shader.mp4'
-import SettingsTimerVue from '../components/SettingsTimer.vue';
-import { UsesettingsUser } from '../store/settingsUser'
+import NavBarVue from "../components/NavBar.vue";
+import PomodoroCardVue from "../components/PomodoroCard.vue";
+import SettingsTimerVue from "../components/SettingsTimer.vue";
 
-const settingsUser = UsesettingsUser()
+import { UsesettingsUser } from "../store/settingsUser";
 
-if (localStorage.getItem('pomodoro')) {
-  settingsUser.GetOfLocalStorage()
+const settingsUser = UsesettingsUser();
+
+if (localStorage.getItem("pomodoro")) {
+  settingsUser.GetOfLocalStorage();
 }
-
-
 </script>
 
 <style lang="scss" scoped>
@@ -43,12 +41,10 @@ if (localStorage.getItem('pomodoro')) {
     z-index: 1;
   }
 }
-  #home {
-    position: relative;
-    z-index: 2;
-    width: 600px;
-      @media (max-width: 767px) {
-      width: 350px;
-    }
-  }
+#home {
+  position: relative;
+  z-index: 2;
+  width: 600px;
+  min-width: 350px;
+}
 </style>
